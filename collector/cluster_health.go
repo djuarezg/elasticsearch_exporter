@@ -230,6 +230,11 @@ func (c *ClusterHealth) fetchAndDecodeClusterHealth() (clusterHealthResponse, er
 		return chr, fmt.Errorf("failed to get cluster health from %s://%s:%s%s: %s",
 			u.Scheme, u.Hostname(), u.Port(), u.Path, err)
 	}
+	level.Warn(c.logger).Log(
+                    "msg", "TESTDJG: " +  u.Scheme + "//" +  u.Hostname()  + "//" + u.Port() + "//" +  u.Path + "//" + res.Body,
+                    "err", u.String(),
+        )
+
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
